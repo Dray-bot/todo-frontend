@@ -10,7 +10,8 @@ export default function Home() {
   const [task, setTask] = useState('');
   const [emptyAnimation, setEmptyAnimation] = useState(null);
 
-  const BACKEND_URL = 'https://todo-backend-eizn.onrender.com/api/todos';
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 
   useEffect(() => {
     fetchTodos();
@@ -19,7 +20,7 @@ export default function Home() {
       .then((data) => setEmptyAnimation(data));
   }, []);
 
-  const fetchTodos = async () => {
+  const fetchTodos = async () => {  
     const res = await fetch(BACKEND_URL);
     const data = await res.json();
     setTodos(data);
